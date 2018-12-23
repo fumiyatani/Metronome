@@ -8,9 +8,12 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_meteonorm.*
 
-class MeteonormActivity : AppCompatActivity() {
+/**
+ * 本当はメトロノームを作る予定だったんだよ
+ * 314BPMのメトロノームがないから。
+ */
 
-    val sampleRate = 44100.0 // Feel free to change this
+class MeteonormActivity : AppCompatActivity() {
 
     var track: AudioTrack? = null
 
@@ -18,20 +21,23 @@ class MeteonormActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meteonorm)
 
-        // ここでAudioTrackの変数をメンバとして持っておかないとplay()でクラッシュしてしまう
-        // なぜか新たに作成したインスタンスを入れるとuninitializeって出てくるから連打に対応できない。。。
-        val soundData = generated8BitSound(440, 0.125)
+        val sampleRate = 44100.0 // Feel free to change this
+
+        // 音階データの作成(ドレミ、今回はラ)
+        val soundData = generated8BitSound(990, 0.125, sampleRate)
+
+        // 新たに作成したインスタンスでplay()をすると初期化がうまくできないのか、
+        // IllegalStateExceptionでクラッシュしていたので、フィールド変数をして最初に作成したインスタンスを保持し、
+        // 再度play()を行う際はすでに初期化済のインスタンスを使用するようにしました。
         track = createAudioTrack(sampleRate, soundData)
         startButton.setOnClickListener {
             startSound(track, soundData)
         }
         stopButton.setOnClickListener {
-            // メトロノームストップ
         }
     }
 
-    private fun generated8BitSound(frequency: Int, duration: Double): ByteArray {
-        val sampleRate = 44100.0 // Feel free to change this
+    private fun generated8BitSound(frequency: Int, duration: Double, sampleRate: Double): ByteArray {
         val soundData = ByteArray((sampleRate * duration).toInt())
 
         for (i in soundData.indices) {
@@ -46,8 +52,10 @@ class MeteonormActivity : AppCompatActivity() {
                 AudioManager.STREAM_MUSIC,
                 sampleRate.toInt(),
                 AudioFormat.CHANNEL_OUT_DEFAULT,
-                AudioFormat.ENCODING_PCM_8BIT, soundData.size,
-                AudioTrack.MODE_STREAM
+                AudioFormat.ENCODING_PCM_8BIT,
+                soundData.size,
+                AudioTrack.MODE_STREAM,
+                AudioManager.AUDIO_SESSION_ID_GENERATE
         )
         return track
     }
