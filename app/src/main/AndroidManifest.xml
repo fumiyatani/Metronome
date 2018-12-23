@@ -9,13 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MeteonormActivity">
+        <activity android:name=".FirstContactActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MetronomeActivity"/>
+        <activity android:name=".BaseContentActivity"/>
+        <activity android:name=".IntervalActivity"/>
     </application>
 
 </manifest>

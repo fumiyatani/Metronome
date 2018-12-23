@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">Meteonorm</string>
+    <string name="app_name">Metronome</string>
+    <string name="button_metronome">メトロノーム</string>
+    <string name="button_music_interval">ドレミ</string>
     <string name="start_text">Start</string>
     <string name="stop_text">Stop</string>
+    <string name="first_bpm_text">60</string>
+    <string name="button_back">戻る</string>
 </resources>
