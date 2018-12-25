@@ -6,6 +6,10 @@ import android.media.AudioTrack
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_interval.*
 
+/**
+ * TODO: このままだとこのクラスがきもいから、SoundCreateクラスのManagerクラスを作る
+ */
+
 class IntervalActivity : BaseContentActivity() {
 
     /** ド 低音 */
