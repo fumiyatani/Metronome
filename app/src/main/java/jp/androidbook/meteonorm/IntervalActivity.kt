@@ -149,6 +149,23 @@ class IntervalActivity : BaseContentActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        cTrack!!.release()
+        csTrack!!.release()
+        dTrack!!.release()
+        dsTrack!!.release()
+        eTrack!!.release()
+        fTrack!!.release()
+        fsTrack!!.release()
+        gTrack!!.release()
+        gsTrack!!.release()
+        aTrack!!.release()
+        asTrack!!.release()
+        bTrack!!.release()
+        ccTrack!!.release()
+    }
+
     private fun setClickListenerToButton() {
 
     }

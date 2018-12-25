@@ -16,6 +16,7 @@ class MetronomeActivity : BaseContentActivity() {
 
     /** AudioTrackオブジェクト */
     private var track: AudioTrack? = null
+    private var soundData: ByteArray? = null
 
     /** 1分を表す定数 */
     private val defaultTempo = 60000
@@ -25,6 +26,16 @@ class MetronomeActivity : BaseContentActivity() {
 
     private var isRunning = false
 
+    val handler = Handler()
+
+    var runnable: Runnable? = object :Runnable {
+        override fun run() {
+            handler.removeCallbacks(this)
+            startSound(track, soundData)
+            handler.postDelayed(this, defaultTempo.toLong() / bpmTempo)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_metronome)
@@ -33,15 +44,12 @@ class MetronomeActivity : BaseContentActivity() {
         val sampleRate = 44100.0
 
         // 音声データ
-        val soundData = generated8BitSound(500, 0.125, sampleRate)
+        soundData = generated8BitSound(500, 0.125, sampleRate)
 
         // 新たに作成したインスタンスでplay()をすると初期化がうまくできないのか、
         // IllegalStateExceptionでクラッシュしていたので、フィールド変数をして最初に作成したインスタンスを保持し、
         // 再度play()を行う際はすでに初期化済のインスタンスを使用するようにしました。
         track = createAudioTrack(sampleRate, soundData)
-
-        val handler = Handler()
-        val runnable = createRunnable(handler, soundData)
 
         startButton.setOnClickListener {
             if (isRunning) {
@@ -62,21 +70,12 @@ class MetronomeActivity : BaseContentActivity() {
         }
     }
 
-    /**
-     * @param handler   ハンドラー
-     * @param soundData 音声データ
-     */
-    private fun createRunnable(handler: Handler, soundData: ByteArray): Runnable {
-        // object : <T> の書き方は匿名クラスをnewする書き方と同じ
-        // Javaだと以下のようになる
-        // return new Runnable() { @Override public void run(){} }
-        return object :Runnable {
-            override fun run() {
-                handler.removeCallbacks(this)
-                startSound(track, soundData)
-                handler.postDelayed(this, defaultTempo.toLong() / bpmTempo)
-            }
-        }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(runnable)
+        track!!.release()
     }
 
     /**
@@ -104,13 +103,13 @@ class MetronomeActivity : BaseContentActivity() {
      * @param soundData  音声データ
      * @return AudioTrack
      */
-    private fun createAudioTrack(sampleRate: Double, soundData: ByteArray): AudioTrack {
+    private fun createAudioTrack(sampleRate: Double, soundData: ByteArray?): AudioTrack {
         return AudioTrack(
                 AudioManager.STREAM_MUSIC,
                 sampleRate.toInt(),
                 AudioFormat.CHANNEL_OUT_DEFAULT,
                 AudioFormat.ENCODING_PCM_8BIT,
-                soundData.size,
+                soundData!!.size,
                 AudioTrack.MODE_STREAM,
                 AudioManager.AUDIO_SESSION_ID_GENERATE
         )
@@ -121,8 +120,8 @@ class MetronomeActivity : BaseContentActivity() {
      * @param track     AudioTrack?
      * @param soundData 音声データ
      */
-    private fun startSound(track: AudioTrack?, soundData: ByteArray) {
-        track!!.write(soundData, 0, soundData.size)
+    private fun startSound(track: AudioTrack?, soundData: ByteArray?) {
+        track!!.write(soundData, 0, soundData!!.size)
         track.play()
     }
 }
