@@ -20,6 +20,7 @@ class FirstContactActivity : AppCompatActivity() {
         }
     }
 
+    // <Any>でワイルドカードかと思ったらAny型だったから通常の<T>でやる
     private fun<T> createIntent(clazz: Class<T>) {
         val intent = Intent(this, clazz)
         startActivity(intent)
