@@ -7,10 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import kotlinx.android.synthetic.main.activity_metronome.*
 
-/**
- * メトロノームは完成したから別のページに移動して
- * ドレミファソラシドの音階を作ってあげるのはどうでしょうか？
- */
 
 class MetronomeActivity : BaseContentActivity() {
 
