@@ -117,6 +117,5 @@ class MetronomeActivity : BaseContentActivity() {
             track?.write(it, 0, it.size)
             track?.play()
         }
-
     }
 }
