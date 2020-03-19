@@ -1,6 +1,6 @@
 package jp.androidbook.meteonorm
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 open class BaseContentActivity : AppCompatActivity() {
 
