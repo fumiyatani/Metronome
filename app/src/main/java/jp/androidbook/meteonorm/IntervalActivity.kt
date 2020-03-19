@@ -242,7 +242,7 @@ class IntervalActivity : BaseContentActivity() {
 
     private fun startSound(track: AudioTrack?, soundData: ByteArray?) {
         soundData?.let {
-            track?.write(it, 0, soundData.size)
+            track?.write(it, 0, it.size)
             track?.play()
         }
     }
