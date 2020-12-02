@@ -4,91 +4,52 @@ import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
 import android.os.Bundle
+import jp.androidbook.meteonorm.data.MusicalScale
 import kotlinx.android.synthetic.main.activity_interval.*
 import kotlin.math.sin
 
 class IntervalActivity : BaseContentActivity() {
 
-    /** ド 低音 */
-    private var cTrack: AudioTrack? = null
-    /** ド シャープ */
-    private var csTrack: AudioTrack? = null
-    /** レ */
-    private var dTrack: AudioTrack? = null
-    /** レ シャープ */
-    private var dsTrack: AudioTrack? = null
-    /** ミ */
-    private var eTrack: AudioTrack? = null
-    /** ファ */
-    private var fTrack: AudioTrack? = null
-    /** ファ シャープ */
-    private var fsTrack: AudioTrack? = null
-    /** ソ */
-    private var gTrack: AudioTrack? = null
-    /** ソ シャープ */
-    private var gsTrack: AudioTrack? = null
-    /** ラ */
-    private var aTrack: AudioTrack? = null
-    /** ラ シャープ */
-    private var asTrack: AudioTrack? = null
-    /** シ */
-    private var bTrack: AudioTrack? = null
-    /** ド 高音 */
-    private var ccTrack: AudioTrack? = null
-
-    // 1秒間にサンプリングする回数
-    private val sampleRate = 44100.0
-    // 音の長さ
-    private val duration = 0.125
-
-    /**  */
-    private val frequencyC = 261.63
-    /**  */
-    private val frequencyCS = 277.18
-    /**  */
-    private val frequencyD = 293.66
-    /**  */
-    private val frequencyDS = 311.13
-    /**  */
-    private val frequencyE = 329.63
-    /**  */
-    private val frequencyF = 349.23
-    /**  */
-    private val frequencyFS = 369.99
-    /**  */
-    private val frequencyG = 392.00
-    /**  */
-    private val frequencyGS = 415.30
-    /**  */
-    private val frequencyA = 440.00
-    /**  */
-    private val frequencyAS = 466.16
-    /**  */
-    private val frequencyB = 493.88
-    /**  */
-    private val frequencyCC = 523.25
+    /** ド4 */
+    private var c4Track: AudioTrack? = null
+    /** ド#4 */
+    private var cs4Track: AudioTrack? = null
+    /** レ4 */
+    private var d4Track: AudioTrack? = null
+    /** レ#4 */
+    private var ds4Track: AudioTrack? = null
+    /** ミ4 */
+    private var e4Track: AudioTrack? = null
+    /** ファ4 */
+    private var f4Track: AudioTrack? = null
+    /** ファ#4 */
+    private var fs4Track: AudioTrack? = null
+    /** ソ4 */
+    private var g4Track: AudioTrack? = null
+    /** ソ#4 */
+    private var gs4Track: AudioTrack? = null
+    /** ラ4 */
+    private var a4Track: AudioTrack? = null
+    /** ラ#4 */
+    private var as4Track: AudioTrack? = null
+    /** シ4 */
+    private var b4Track: AudioTrack? = null
+    /** ド4 */
+    private var c5Track: AudioTrack? = null
 
     private var soundDataC: ByteArray? = null
     private var soundDataCS: ByteArray? = null
-
     private var soundDataD: ByteArray? = null
     private var soundDataDS: ByteArray? = null
-
     private var soundDataE: ByteArray? = null
-
     private var soundDataF: ByteArray? = null
     private var soundDataFS: ByteArray? = null
-
     private var soundDataG: ByteArray? = null
     private var soundDataGS: ByteArray? = null
-
     private var soundDataA: ByteArray? = null
     private var soundDataAS: ByteArray? = null
-
     private var soundDataB: ByteArray? = null
-
     private var soundDataCC: ByteArray? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,129 +60,114 @@ class IntervalActivity : BaseContentActivity() {
         }
 
         cButton.setOnClickListener {
-            startSound(cTrack, soundDataC)
+            startSound(c4Track, soundDataC)
         }
 
         csButton.setOnClickListener {
-            startSound(csTrack, soundDataCS)
+            startSound(cs4Track, soundDataCS)
         }
 
         dButton.setOnClickListener {
-            startSound(dTrack, soundDataD)
+            startSound(d4Track, soundDataD)
         }
 
         dsButton.setOnClickListener {
-            startSound(dsTrack, soundDataDS)
+            startSound(ds4Track, soundDataDS)
         }
 
         eButton.setOnClickListener {
-            startSound(eTrack, soundDataE)
+            startSound(e4Track, soundDataE)
         }
 
         fButton.setOnClickListener {
-            startSound(fTrack, soundDataF)
+            startSound(f4Track, soundDataF)
         }
 
         fsButton.setOnClickListener {
-            startSound(fsTrack, soundDataFS)
+            startSound(fs4Track, soundDataFS)
         }
 
         gButton.setOnClickListener {
-            startSound(gTrack, soundDataG)
+            startSound(g4Track, soundDataG)
         }
 
         gsButton.setOnClickListener {
-            startSound(gsTrack, soundDataGS)
+            startSound(gs4Track, soundDataGS)
         }
 
         aButton.setOnClickListener {
-            startSound(aTrack, soundDataA)
+            startSound(a4Track, soundDataA)
         }
 
         asButton.setOnClickListener {
-            startSound(asTrack, soundDataAS)
+            startSound(as4Track, soundDataAS)
         }
 
         bButton.setOnClickListener {
-            startSound(bTrack, soundDataB)
+            startSound(b4Track, soundDataB)
         }
 
         ccButton.setOnClickListener {
-            startSound(ccTrack, soundDataCC)
+            startSound(c5Track, soundDataCC)
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        cTrack?.release()
-        csTrack?.release()
-        dTrack?.release()
-        dsTrack?.release()
-        eTrack?.release()
-        fTrack?.release()
-        fsTrack?.release()
-        gTrack?.release()
-        gsTrack?.release()
-        aTrack?.release()
-        asTrack?.release()
-        bTrack?.release()
-        ccTrack?.release()
+        c4Track?.release()
+        cs4Track?.release()
+        d4Track?.release()
+        ds4Track?.release()
+        e4Track?.release()
+        f4Track?.release()
+        fs4Track?.release()
+        g4Track?.release()
+        gs4Track?.release()
+        a4Track?.release()
+        as4Track?.release()
+        b4Track?.release()
+        c5Track?.release()
     }
 
     private fun initAudioTrack() {
-        soundDataC = generate8BitSoundData(frequencyC)
-        soundDataCS = generate8BitSoundData(frequencyCS)
-
-        soundDataD = generate8BitSoundData(frequencyD)
-        soundDataDS = generate8BitSoundData(frequencyDS)
-
-        soundDataE = generate8BitSoundData(frequencyE)
-
-        soundDataF = generate8BitSoundData(frequencyF)
-        soundDataFS = generate8BitSoundData(frequencyFS)
-
-        soundDataG = generate8BitSoundData(frequencyG)
-        soundDataGS = generate8BitSoundData(frequencyGS)
-
-        soundDataA = generate8BitSoundData(frequencyA)
-        soundDataAS = generate8BitSoundData(frequencyAS)
-
-        soundDataB = generate8BitSoundData(frequencyB)
-
-        soundDataCC = generate8BitSoundData(frequencyCC)
-
+        soundDataC = generate8BitSoundData(MusicalScale.C4.frequency)
+        soundDataCS = generate8BitSoundData(MusicalScale.CS4.frequency)
+        soundDataD = generate8BitSoundData(MusicalScale.D4.frequency)
+        soundDataDS = generate8BitSoundData(MusicalScale.DS4.frequency)
+        soundDataE = generate8BitSoundData(MusicalScale.E4.frequency)
+        soundDataF = generate8BitSoundData(MusicalScale.F4.frequency)
+        soundDataFS = generate8BitSoundData(MusicalScale.FS4.frequency)
+        soundDataG = generate8BitSoundData(MusicalScale.G4.frequency)
+        soundDataGS = generate8BitSoundData(MusicalScale.GS4.frequency)
+        soundDataA = generate8BitSoundData(MusicalScale.A4.frequency)
+        soundDataAS = generate8BitSoundData(MusicalScale.AS4.frequency)
+        soundDataB = generate8BitSoundData(MusicalScale.B4.frequency)
+        soundDataCC = generate8BitSoundData(MusicalScale.C5.frequency)
 
         // 新たに作成したインスタンスでplay()をすると初期化がうまくできないのか、
         // IllegalStateExceptionでクラッシュしていたので、フィールド変数をして最初に作成したインスタンスを保持し、
         // 再度play()を行う際はすでに初期化済のインスタンスを使用するようにしました。
-        cTrack = createAudioTrack(soundDataC)
-        csTrack = createAudioTrack(soundDataCS)
-
-        dTrack = createAudioTrack(soundDataD)
-        dsTrack = createAudioTrack(soundDataDS)
-
-        eTrack = createAudioTrack(soundDataE)
-
-        fTrack = createAudioTrack(soundDataF)
-        fsTrack = createAudioTrack(soundDataFS)
-
-        gTrack = createAudioTrack(soundDataG)
-        gsTrack = createAudioTrack(soundDataGS)
-
-        aTrack = createAudioTrack(soundDataA)
-        asTrack = createAudioTrack(soundDataAS)
-
-        bTrack = createAudioTrack(soundDataB)
-
-        ccTrack = createAudioTrack(soundDataCC)
+        c4Track = createAudioTrack(soundDataC)
+        cs4Track = createAudioTrack(soundDataCS)
+        d4Track = createAudioTrack(soundDataD)
+        ds4Track = createAudioTrack(soundDataDS)
+        e4Track = createAudioTrack(soundDataE)
+        f4Track = createAudioTrack(soundDataF)
+        fs4Track = createAudioTrack(soundDataFS)
+        g4Track = createAudioTrack(soundDataG)
+        gs4Track = createAudioTrack(soundDataGS)
+        a4Track = createAudioTrack(soundDataA)
+        as4Track = createAudioTrack(soundDataAS)
+        b4Track = createAudioTrack(soundDataB)
+        c5Track = createAudioTrack(soundDataCC)
     }
 
     //各音源を生成する
     private fun generate8BitSoundData(frequency: Double): ByteArray {
-        val soundData = ByteArray((sampleRate * duration).toInt())
+        val soundData = ByteArray((SAMPLING_RATE * DURATION).toInt())
 
         for (i in soundData.indices) {
-            val sample = (sin(2 * Math.PI * frequency * i / sampleRate) * 255).toByte()
+            val sample = (sin(2 * Math.PI * frequency * i / SAMPLING_RATE) * 255).toInt().toByte()
             soundData[i] = sample
         }
         return soundData
@@ -231,7 +177,7 @@ class IntervalActivity : BaseContentActivity() {
     private fun createAudioTrack(soundData: ByteArray?): AudioTrack {
         return AudioTrack(
                 AudioManager.STREAM_MUSIC,
-                sampleRate.toInt(),
+                SAMPLING_RATE.toInt(),
                 AudioFormat.CHANNEL_OUT_DEFAULT,
                 AudioFormat.ENCODING_PCM_8BIT,
                 soundData!!.size,
@@ -245,5 +191,12 @@ class IntervalActivity : BaseContentActivity() {
             track?.write(it, 0, it.size)
             track?.play()
         }
+    }
+
+    companion object {
+        // 1秒間にサンプリングする回数
+        private const val SAMPLING_RATE = 44100.0
+        // 音の長さ
+        private const val DURATION = 0.125
     }
 }
