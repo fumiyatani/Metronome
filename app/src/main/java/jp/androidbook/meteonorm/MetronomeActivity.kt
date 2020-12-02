@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import jp.androidbook.meteonorm.data.MusicalScale
 import jp.androidbook.meteonorm.databinding.ActivityMetronomeBinding
 import kotlin.math.sin
 
@@ -20,10 +21,11 @@ class MetronomeActivity : AppCompatActivity() {
 
     /** 1分を表す定数 */
     private val defaultTempo = 60000
-    // 1秒間にサンプリングする回数
+
+    /** 1秒間にサンプリングする回数 */
     private val sampleRate = 44100.0
-    private val defaultFrequency = 500
-    // 音の長さ
+
+    /** 音の長さ */
     private val defaultDuration = 0.125
 
     /** BPMを表す数: デフォルトは60bpm */
@@ -88,7 +90,8 @@ class MetronomeActivity : AppCompatActivity() {
         val soundData = ByteArray((sampleRate * defaultDuration).toInt())
 
         for (i in soundData.indices) {
-            val sample = (sin(2 * Math.PI * defaultFrequency * i / sampleRate) * 255).toInt().toByte()
+            val frequency = MusicalScale.A4.frequency.toInt()
+            val sample = (sin(2 * Math.PI * frequency * i / sampleRate) * 255).toInt().toByte()
             soundData[i] = sample
         }
         return soundData
