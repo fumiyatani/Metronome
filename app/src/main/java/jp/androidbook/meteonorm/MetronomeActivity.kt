@@ -6,11 +6,13 @@ import android.media.AudioTrack
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_metronome.*
+import androidx.databinding.DataBindingUtil
+import jp.androidbook.meteonorm.databinding.ActivityMetronomeBinding
 import kotlin.math.sin
 
-
 class MetronomeActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMetronomeBinding
 
     /** AudioTrackオブジェクト */
     private var track: AudioTrack? = null
@@ -31,7 +33,7 @@ class MetronomeActivity : AppCompatActivity() {
 
     val handler = Handler()
 
-    private var runnable: Runnable? = object :Runnable {
+    private var runnable: Runnable = object :Runnable {
         override fun run() {
             handler.removeCallbacks(this)
             startSound(track, soundData)
@@ -41,7 +43,7 @@ class MetronomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_metronome)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_metronome)
         // 音声データ
         soundData = generated8BitSound()
 
@@ -49,22 +51,25 @@ class MetronomeActivity : AppCompatActivity() {
         // IllegalStateExceptionでクラッシュしていたので、フィールド変数をして最初に作成したインスタンスを保持し、
         // 再度play()を行う際はすでに初期化済のインスタンスを使用するようにしました。
         track = createAudioTrack()
+        setupViews()
+    }
 
-        startButton.setOnClickListener {
+    private fun setupViews() {
+        binding.startButton.setOnClickListener {
             if (isRunning) {
                 handler.removeCallbacks(runnable)
             }
-            bpmTempo = Integer.parseInt(bpmEdit.text.toString())
+            bpmTempo = Integer.parseInt(binding.bpmEdit.text.toString())
             handler.post(runnable)
             isRunning = true
         }
 
-        stopButton.setOnClickListener {
+        binding.stopButton.setOnClickListener {
             handler.removeCallbacks(runnable)
             isRunning = false
         }
 
-        backButton.setOnClickListener{
+        binding.backButton.setOnClickListener{
             finish()
         }
     }
@@ -83,7 +88,7 @@ class MetronomeActivity : AppCompatActivity() {
         val soundData = ByteArray((sampleRate * defaultDuration).toInt())
 
         for (i in soundData.indices) {
-            val sample = (sin(2 * Math.PI * defaultFrequency * i / sampleRate) * 255).toByte()
+            val sample = (sin(2 * Math.PI * defaultFrequency * i / sampleRate) * 255).toInt().toByte()
             soundData[i] = sample
         }
         return soundData

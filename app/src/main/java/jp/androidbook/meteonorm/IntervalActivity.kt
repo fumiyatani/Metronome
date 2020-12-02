@@ -5,11 +5,14 @@ import android.media.AudioManager
 import android.media.AudioTrack
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import jp.androidbook.meteonorm.data.MusicalScale
-import kotlinx.android.synthetic.main.activity_interval.*
+import jp.androidbook.meteonorm.databinding.ActivityIntervalBinding
 import kotlin.math.sin
 
 class IntervalActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityIntervalBinding
 
     /** ド4 */
     private var c4Track: AudioTrack? = null
@@ -54,64 +57,69 @@ class IntervalActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_interval)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_interval)
         initAudioTrack()
-        backButton.setOnClickListener {
+        setupViews()
+    }
+
+    private fun setupViews() {
+        binding.backButton.setOnClickListener {
             finish()
         }
 
-        cButton.setOnClickListener {
+        binding.cButton.setOnClickListener {
             startSound(c4Track, soundDataC)
         }
 
-        csButton.setOnClickListener {
+        binding.csButton.setOnClickListener {
             startSound(cs4Track, soundDataCS)
         }
 
-        dButton.setOnClickListener {
+        binding.dButton.setOnClickListener {
             startSound(d4Track, soundDataD)
         }
 
-        dsButton.setOnClickListener {
+        binding.dsButton.setOnClickListener {
             startSound(ds4Track, soundDataDS)
         }
 
-        eButton.setOnClickListener {
+        binding.eButton.setOnClickListener {
             startSound(e4Track, soundDataE)
         }
 
-        fButton.setOnClickListener {
+        binding.fButton.setOnClickListener {
             startSound(f4Track, soundDataF)
         }
 
-        fsButton.setOnClickListener {
+        binding.fsButton.setOnClickListener {
             startSound(fs4Track, soundDataFS)
         }
 
-        gButton.setOnClickListener {
+        binding.gButton.setOnClickListener {
             startSound(g4Track, soundDataG)
         }
 
-        gsButton.setOnClickListener {
+        binding.gsButton.setOnClickListener {
             startSound(gs4Track, soundDataGS)
         }
 
-        aButton.setOnClickListener {
+        binding.aButton.setOnClickListener {
             startSound(a4Track, soundDataA)
         }
 
-        asButton.setOnClickListener {
+        binding.asButton.setOnClickListener {
             startSound(as4Track, soundDataAS)
         }
 
-        bButton.setOnClickListener {
+        binding.bButton.setOnClickListener {
             startSound(b4Track, soundDataB)
         }
 
-        ccButton.setOnClickListener {
+        binding.ccButton.setOnClickListener {
             startSound(c5Track, soundDataCC)
         }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

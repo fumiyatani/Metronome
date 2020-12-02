@@ -4,25 +4,32 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import androidx.databinding.DataBindingUtil
+import jp.androidbook.meteonorm.databinding.ActivityFirstContactBinding
 import kotlinx.android.synthetic.main.activity_first_contact.*
 
 class FirstContactActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityFirstContactBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_first_contact)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_first_contact)
+        setupViews()
     }
 
-    fun onClick(view: View) {
-        when(view) {
-            metronomeButton -> createIntent(MetronomeActivity::class.java)
-            intervalButton  -> createIntent(IntervalActivity::class.java)
+    private fun setupViews() {
+        // キーボード画面に遷移
+        binding.intervalButton.setOnClickListener {
+            Intent(this, IntervalActivity::class.java).also {
+                startActivity(it)
+            }
         }
-    }
-
-    // <Any>でワイルドカードかと思ったらAny型だったから通常の<T>でやる
-    private fun<T> createIntent(clazz: Class<T>) {
-        val intent = Intent(this, clazz)
-        startActivity(intent)
+        // メトロノーム画面に遷移
+        binding.metronomeButton.setOnClickListener {
+            Intent(this, MetronomeActivity::class.java).also {
+                startActivity(it)
+            }
+        }
     }
 }

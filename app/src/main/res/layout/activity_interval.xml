@@ -1,133 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <Button
-        android:id="@+id/backButton"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_back"
-        android:textColor="@android:color/holo_blue_light"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <LinearLayout
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/cButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="C" />
-
-        <Button
-            android:id="@+id/csButton"
-            android:layout_width="0dp"
+            android:id="@+id/backButton"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="C#/Db"
-            android:layout_gravity="center"
-            android:textSize="14sp" />
+            android:text="@string/button_back"
+            android:textColor="@android:color/holo_blue_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/dButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="D" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/dsButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="D#/Eb"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/cButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="C" />
 
-        <Button
-            android:id="@+id/eButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="E" />
+            <Button
+                android:id="@+id/csButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="C#/Db"
+                android:layout_gravity="center"
+                android:textSize="14sp" />
 
-        <Button
-            android:id="@+id/fButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="F" />
+            <Button
+                android:id="@+id/dButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="D" />
 
-        <Button
-            android:id="@+id/fsButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="F#/Gb"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/dsButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="D#/Eb"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/gButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="G" />
+            <Button
+                android:id="@+id/eButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="E" />
 
-        <Button
-            android:id="@+id/gsButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="G#/Ab"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/fButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="F" />
 
-        <Button
-            android:id="@+id/aButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="A" />
+            <Button
+                android:id="@+id/fsButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="F#/Gb"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/asButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="A#/Bb"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/gButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="G" />
 
-        <Button
-            android:id="@+id/bButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="B" />
+            <Button
+                android:id="@+id/gsButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="G#/Ab"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/ccButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="C" />
+            <Button
+                android:id="@+id/aButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="A" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/asButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="A#/Bb"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/bButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="B" />
+
+            <Button
+                android:id="@+id/ccButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="C" />
+
+        </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
