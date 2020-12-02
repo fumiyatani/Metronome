@@ -1,6 +1,7 @@
 package jp.androidbook.meteonorm.data
 
 /**
+ * TODO 音階を鍵盤の位置から計算できるようにしたい
  * 音階
  *
  * @param frequency 音階の周波数
