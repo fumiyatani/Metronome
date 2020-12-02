@@ -17,7 +17,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MetronomeActivity"/>
-        <activity android:name=".BaseContentActivity"/>
         <activity
             android:name=".IntervalActivity"
             android:screenOrientation="landscape">

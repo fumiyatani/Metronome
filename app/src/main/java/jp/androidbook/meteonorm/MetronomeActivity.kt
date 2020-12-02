@@ -5,11 +5,12 @@ import android.media.AudioManager
 import android.media.AudioTrack
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_metronome.*
 import kotlin.math.sin
 
 
-class MetronomeActivity : BaseContentActivity() {
+class MetronomeActivity : AppCompatActivity() {
 
     /** AudioTrackオブジェクト */
     private var track: AudioTrack? = null
@@ -64,11 +65,9 @@ class MetronomeActivity : BaseContentActivity() {
         }
 
         backButton.setOnClickListener{
-            onClickBackButton()
+            finish()
         }
     }
-
-
 
     override fun onDestroy() {
         super.onDestroy()

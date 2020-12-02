@@ -4,11 +4,12 @@ import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import jp.androidbook.meteonorm.data.MusicalScale
 import kotlinx.android.synthetic.main.activity_interval.*
 import kotlin.math.sin
 
-class IntervalActivity : BaseContentActivity() {
+class IntervalActivity : AppCompatActivity() {
 
     /** ド4 */
     private var c4Track: AudioTrack? = null
@@ -56,7 +57,7 @@ class IntervalActivity : BaseContentActivity() {
         setContentView(R.layout.activity_interval)
         initAudioTrack()
         backButton.setOnClickListener {
-            onClickBackButton()
+            finish()
         }
 
         cButton.setOnClickListener {
