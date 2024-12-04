@@ -1,5 +1,6 @@
 package jp.androidbook.meteonorm
 
+import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
@@ -35,7 +36,7 @@ class MetronomeActivity : AppCompatActivity() {
 
     val handler = Handler()
 
-    private var runnable: Runnable = object :Runnable {
+    private var runnable: Runnable = object : Runnable {
         override fun run() {
             handler.removeCallbacks(this)
             startSound(track, soundData)
@@ -71,7 +72,7 @@ class MetronomeActivity : AppCompatActivity() {
             isRunning = false
         }
 
-        binding.backButton.setOnClickListener{
+        binding.backButton.setOnClickListener {
             finish()
         }
     }
@@ -101,16 +102,22 @@ class MetronomeActivity : AppCompatActivity() {
      * AudioTrackのインスタンツを生成する
      * @return AudioTrack
      */
-    @Suppress("DEPRECATION")
     private fun createAudioTrack(): AudioTrack {
+        val audioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .build()
+        val audioFormat = AudioFormat.Builder()
+            .setSampleRate(sampleRate.toInt())
+            .setChannelMask(AudioFormat.CHANNEL_OUT_DEFAULT)
+            .setEncoding(AudioFormat.ENCODING_PCM_8BIT)
+            .build()
         return AudioTrack(
-                AudioManager.STREAM_MUSIC,
-                sampleRate.toInt(),
-                AudioFormat.CHANNEL_OUT_DEFAULT,
-                AudioFormat.ENCODING_PCM_8BIT,
-                soundData!!.size,
-                AudioTrack.MODE_STREAM,
-                AudioManager.AUDIO_SESSION_ID_GENERATE
+            audioAttributes,
+            audioFormat,
+            soundData!!.size,
+            AudioTrack.MODE_STREAM,
+            AudioManager.AUDIO_SESSION_ID_GENERATE,
         )
     }
 
